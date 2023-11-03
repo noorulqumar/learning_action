@@ -15,5 +15,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Good bye
-        run: print("Good Bye World")
+        run: python -c 'print("Goodbye World")'
         shell: python3
