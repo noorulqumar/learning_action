@@ -16,4 +16,4 @@ jobs:
     steps:
       - name: Good bye
         run: python -c 'print("Goodbye World")'
-        shell: python3
+        shell: bash
