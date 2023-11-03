@@ -3,7 +3,11 @@ on:
   push:
     branches:
       - main
+<<<<<<< HEAD
   workflow_dispatch:
+=======
+  workflow: dispatch
+>>>>>>> origin/main
 jobs:
   first-job:
     runs-on: ubuntu-latest
