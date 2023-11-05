@@ -45,5 +45,8 @@ jobs:
     runs-on: self-hosted
     needs: [Build-docker-image]
     steps:
+      - name: delete all running containers
+        run:  docker rm -f $(docker ps -aq)
+
       - name : Run docker Container
         run: docker run -d -p 80:80 my-image:2
