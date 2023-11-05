@@ -5,7 +5,14 @@ on:
       - main
   workflow_dispatch:
 jobs:
-  first-job:
+
+  check-out-code:
+    runs-on: self-hosted
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+  Check-and-Setup-docker:
     runs-on: self-hosted
     steps:
 
@@ -23,3 +30,14 @@ jobs:
 
       - name: Check Docker version
         run: docker --version
+
+    
+  Build-docker-image:
+    runs-on: self-hosted
+    needs: [check-out-code, Check-and-Setup-docker]
+    steps:
+      - name: Build docker image
+        run: docker build -t my-image:1 .
+
+      - name: Show all docker images
+        run: docker images
