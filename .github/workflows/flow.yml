@@ -50,3 +50,12 @@ jobs:
 
       - name : Run docker Container
         run: docker run -d -p 80:80 my-image:2
+  Login-to-dockerHub:
+    runs-on: self-hosted
+    needs: [Build-docker-image]
+    steps:
+      - name: Login-to-Dhub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME}}
+          password: ${{ secrets.DOCKERHUB_PASS}}
