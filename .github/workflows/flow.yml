@@ -59,3 +59,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME}}
           password: ${{ secrets.DOCKERHUB_PASS}}
+
+      - name: Push image to DockerHub
+        run: docker push noorulqumar80/my-image:2
