@@ -37,7 +37,7 @@ jobs:
     needs: [check-out-code, Check-and-Setup-docker]
     steps:
       - name: Build docker image
-        run: docker build -t my-image:2 .
+        run: docker build -t noorulqumar80/my-image:2 .
 
       - name: Show all docker images
         run: docker images
@@ -49,7 +49,7 @@ jobs:
         run:  docker rm -f $(docker ps -aq)
 
       - name : Run docker Container
-        run: docker run -d -p 80:80 my-image:2
+        run: docker run -d -p 80:80 noorulqumar80/my-image:2
   Login-to-dockerHub:
     runs-on: self-hosted
     needs: [Build-docker-image]
