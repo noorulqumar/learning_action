@@ -37,7 +37,13 @@ jobs:
     needs: [check-out-code, Check-and-Setup-docker]
     steps:
       - name: Build docker image
-        run: docker build -t my-image:1 .
+        run: docker build -t my-image:2 .
 
       - name: Show all docker images
         run: docker images
+  Run-the-Build-Container:
+    runs-on: self-hosted
+    needs: [Build-docker-image]
+    steps:
+      - name : Run docker Container
+        run: docker run -d -p 80:80 my-image:2
