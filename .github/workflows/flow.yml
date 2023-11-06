@@ -12,9 +12,6 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v3
 
-      - name: echo
-        run: echo $GITHUB_JOB
-
   Check-and-Setup-docker:
     runs-on: self-hosted
     steps:
@@ -40,7 +37,7 @@ jobs:
     needs: [check-out-code, Check-and-Setup-docker]
     steps:
       - name: Build docker image
-        run: docker build -t noorulqumar80/my-image:2 .
+        run: docker build -t noorulqumar80/my-image:$GITHUB_RUN_NUMBER .
 
       - name: Show all docker images
         run: docker images
@@ -52,7 +49,7 @@ jobs:
         run:  docker rm -f $(docker ps -aq)
 
       - name : Run docker Container
-        run: docker run -d -p 80:80 noorulqumar80/my-image:2
+        run: docker run -d -p 80:80 noorulqumar80/my-image:$GITHUB_RUN_NUMBER
   Login-to-dockerHub:
     runs-on: self-hosted
     needs: [Build-docker-image]
@@ -64,4 +61,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASS}}
 
       - name: Push image to DockerHub
-        run: docker push noorulqumar80/my-image:2
+        run: docker push noorulqumar80/my-image:$GITHUB_RUN_NUMBER
